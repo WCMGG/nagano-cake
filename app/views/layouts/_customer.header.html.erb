@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-   <title>Nagano-</title>
+   <title>NaganoCake</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -9,4 +9,29 @@
     <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
   </head>
 
-<h2>テスト部分</h2>
+<header>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+    <div class="container">
+      <a class="navbar-brand" href="/"><span>LOGO</span></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ml-auto">
+        <% if customer_signed_in? %>
+          <li><button type="button" class="btn btn-warning rounded-pill btn-outline-dark">About</button></li>
+          <li><button type="button" class="btn btn-warning rounded-pill btn-outline-dark">商品一覧</button></li>
+          <li><button type="button" class="btn btn-warning rounded-pill btn-outline-dark">カート</button></li>
+          <li><button type="button" class="btn btn-warning rounded-pill btn-outline-dark">ログイン</button></li>
+        <% else %>
+          <li><button type="button" class="btn btn-warning rounded-pill btn-outline-dark">マイページ</button></li>
+          <li><button type="button" class="btn btn-warning rounded-pill btn-outline-dark">商品一覧</button></li>
+          <li><button type="button" class="btn btn-warning rounded-pill btn-outline-dark">カート</button></li>
+          <li><button type="button" class="btn btn-warning rounded-pill btn-outline-dark">ログアウト</button></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+</html>
