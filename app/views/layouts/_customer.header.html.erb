@@ -10,9 +10,10 @@
   </head>
 
 <header>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+  <nav class="navbar navbar-expand-lg navbar-dark" style="background-color:#d78c42;">
     <div class="container">
-      <a class="navbar-brand"><%= link_to image_tag("logo.png"), root_path %></a>
+      <a class="navbar-brand"><%= link_to root_path do %>
+      <%= image_tag "logo.png", :width => '100', :height => '100' %><% end %></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -60,6 +61,7 @@
               <button type="button" class="btn btn-warning rounded-pill btn-outline-dark">ログイン</button>
             <% end %>
           </li>
+
         <% end %>
         </ul>
       </div>
