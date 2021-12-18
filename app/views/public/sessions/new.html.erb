@@ -1,9 +1,9 @@
 <%= render "layouts/header" %>
 
 <div class="container my-5">
-<h4>会員の方はこちらからログイン</h4>
+  <h4>会員の方はこちらからログイン</h4>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="field">
     <%= f.label :メールアドレス %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
@@ -18,13 +18,19 @@
     <%= f.submit "ログイン", class: "btn btn-primary" %>
   </div><br>
   <% end %>
-<div class="row">
-  <div class="col-xs-5">
-    <h4>登録がお済でない方</h4>
-      <%= link_to "こちら", new_customer_registration_path %>
-      <strong>から新規登録を行ってください。</strong>
-  </div>
-  </div>
-</div>
 
+  <div class="row">
+    <div class="col-xs-5">
+      <h4>登録がお済でない方</h4>
+        <%= link_to "こちら", new_customer_registration_path %>
+      <strong>から新規登録を行ってください。</strong>
+    </div>
+  </div><br>
+  <div class="row">
+    <div class="col-xs-5">
+      <h4>管理者の方</h4>
+        <%= link_to "こちら", new_admin_session_path %>
+      <strong>からログインしてください</strong>
+    </div>
+  </div>
 </div>
