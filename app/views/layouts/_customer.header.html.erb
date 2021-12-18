@@ -10,21 +10,22 @@
   </head>
 
 <header>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+  <nav class="navbar navbar-expand-lg navbar-dark" style="background-color:#d78c42;">
     <div class="container">
-      <a class="navbar-brand"><%= link_to image_tag("logo.png"), root_path %></a>
+      <a class="navbar-brand"><%= link_to root_path do %>
+      <%= image_tag "logo.png", :width => '100', :height => '100' %><% end %></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav ml-auto">
         <% if customer_signed_in? %>
-          <li><button type="button" class="btn btn-warning rounded-pill btn-outline-dark">About</button></li>
+          <li><button type="button" class="btn btn-warning rounded-pill btn-outline-dark mr=3">About</button></li>
           <li><button type="button" class="btn btn-warning rounded-pill btn-outline-dark">商品一覧</button></li>
           <li><button type="button" class="btn btn-warning rounded-pill btn-outline-dark">カート</button></li>
           <li><button type="button" class="btn btn-warning rounded-pill btn-outline-dark">ログイン</button></li>
         <% else %>
-          <li><button type="button" class="btn btn-warning rounded-pill btn-outline-dark">マイページ</button></li>
+          <li><button type="button" class="btn btn-warning rounded-pill btn-outline-dark mr=3">マイページ</button></li>
           <li><button type="button" class="btn btn-warning rounded-pill btn-outline-dark">商品一覧</button></li>
           <li><button type="button" class="btn btn-warning rounded-pill btn-outline-dark">カート</button></li>
           <li><button type="button" class="btn btn-warning rounded-pill btn-outline-dark">ログアウト</button></li>

@@ -1,54 +1,5 @@
 Rails.application.routes.draw do
-
-# Customer側
-
-  root "public/homes#top"
-  get "home/about" => "public/homes#about"
-
-# その他Customer
-# get "unsubscribe" => "public/customers#unsubscribe" 
-# delete "destroy_all => "public/cart_items#destroy_all"
-
-# その他Admin
-
-
-scope module: :public do
-  
-  resources :customers, only: [:show, :edit, :update]
-  resources :orders, only: [:create, :new, :index, :show]
-  resources :addresses, only: [:index, :edit, :create, :update, :destroy]
-  resources :items, only: [:index, :show]
-  resources :cart_items, only: [:index, :create, :update, :destroy]
-  
-  # customer
-  get "unsubscribe" => "customers#unsubscribe"
-  patch "withdraw" => "customers#withdraw"
-  
-  # cart_items
-  delete "destroy_all" => "cart_items#destroy_all" 
-  
-  # orders
-  get "complete" => "orders#complete"
-  post "confirm" => "orders#confirm"
-  
-end
-
-# Admin側
-
-namespace :admin do
-  
-  resources :customers, only: [:index, :show, :edit, :update]
-  resources :items, only: [:index, :show, :edit, :new, :create, :update]
-  resources :orders, only: [:index, :show, :update]
-  resources :genres, only: [:index, :edit, :create, :update]
-  resources :order_details, only: [:update]
-  
-  
-end
-
-
-
-# Devise
+  # Devise
 
   # 顧客用
 # URL /customers/sign_in ...
@@ -63,5 +14,44 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
   sessions: "admin/sessions"
 }
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+scope module: :public do
+
+  resources :customers, only: [:show, :edit, :update]
+  resources :orders, only: [:create, :new, :index, :show]
+  resources :addresses, only: [:index, :edit, :create, :update, :destroy]
+  resources :items, only: [:index, :show]
+  resources :cart_items, only: [:index, :create, :update, :destroy]
+
+  # Top aboutページ
+  root "public/homes#top"
+  get "home/about" => "public/homes#about"
+
+  # customer
+  get "unsubscribe" => "customers#unsubscribe"
+  patch "withdraw" => "customers#withdraw"
+
+  # cart_items
+  delete "destroy_all" => "cart_items#destroy_all"
+
+  # orders
+  get "complete" => "orders#complete"
+  post "confirm" => "orders#confirm"
+
+  end
+
+# Admin側
+
+namespace :admin do
+
+  resources :customers, only: [:index, :show, :edit, :update]
+  resources :items, only: [:index, :show, :edit, :new, :create, :update]
+  resources :orders, only: [:index, :show, :update]
+  resources :genres, only: [:index, :edit, :create, :update]
+  resources :order_details, only: [:update]
+
+
+  end
+
 
 end
