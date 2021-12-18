@@ -7,7 +7,7 @@
         <% if customer_signed_in? %>
 
           <li>
-            <%= link_to customer_path(current_user) do %>
+            <%= link_to customer_path(current_customer) do %>
               <button type="button" class="btn btn-warning rounded-pill btn-outline-dark">マイページ</button>
             <% end %>
           </li>
@@ -22,7 +22,7 @@
             <% end %>
           </li>
           <li>
-            <%= link_to destroy_customer_session_path do %>
+            <%= link_to destroy_customer_session_path, method: :delete do %>
               <button type="button" class="btn btn-warning rounded-pill btn-outline-dark">ログアウト</button>
             <% end %>
           </li>
@@ -50,7 +50,7 @@
             <% end %>
           </li>
           <li>
-            <%= link_to destroy_admin_session_path do %>
+            <%= link_to destroy_admin_session_path, method: :delete do %>
               <button type="button" class="btn btn-warning rounded-pill btn-outline-dark">ログアウト</button>
             <% end %>
           </li>
