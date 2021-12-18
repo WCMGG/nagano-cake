@@ -1,7 +1,8 @@
 <header>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+  <nav class="navbar navbar-expand-lg navbar-dark" style="background-color:#d78c42;">
     <div class="container">
-      <a class="navbar-brand"><%= link_to image_tag("logo.png"), root_path %></a>
+      <a class="navbar-brand"><%= link_to root_path do %>
+      <%= image_tag "logo.png", :width => '100', :height => '100' %><% end %></a>
         <ul class="navbar-nav ml-auto">
         <% if customer_signed_in? %>
 
@@ -66,7 +67,7 @@
             <% end %>
           </li>
           <li>
-            <%= link_to customer_registration_path do %>
+            <%= link_to new_customer_registration_path do %>
               <button type="button" class="btn btn-warning rounded-pill btn-outline-dark">新規登録</button>
             <% end %>
           </li>

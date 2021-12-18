@@ -24,8 +24,8 @@ scope module: :public do
   resources :cart_items, only: [:index, :create, :update, :destroy]
 
   # Top aboutページ
-  root "public/homes#top"
-  get "home/about" => "public/homes#about"
+  root "homes#top"
+  get "home/about" => "homes#about"
 
   # customer
   get "unsubscribe" => "customers#unsubscribe"
