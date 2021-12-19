@@ -3,12 +3,14 @@ class Public::CustomersController < ApplicationController
   end
   
   def edit
+    @customer = Customer.find(params[:id])
   end
   
   def unsubscribe
   end
   
   def update
+    
   end
   
   def withdraw
