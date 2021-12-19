@@ -1,20 +1,33 @@
 class Admin::ItemsController < ApplicationController
   def new
-  end 
-  
+    @item = Item.new
+  end
+
   def show
-  end 
-  
+  end
+
   def index
-  end 
-  
+  end
+
   def edit
-  end 
-  
+  end
+
   def create
-  end 
-  
+    @item = Item.new(item_params)
+    if @item.save
+      redirect_to admin_item_path(@item)
+    else
+      render "new"
+    end
+  end
+
   def update
-  end 
-  
+  end
+
+  private
+
+  def item_params
+    params.require(:item).permit(:image)
+  end
+
 end
