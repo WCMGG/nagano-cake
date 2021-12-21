@@ -1,17 +1,16 @@
-
 <div class="container mr-5 ">
   <div class-"row">
 
-    <h1>商品新規登録</h1>
+    <h2>商品新規登録</h2>
 
-    <%= form_with model:@item,url:admin_items_path,local:true do |f| %>
+    <%= form_with model:@item, url:admin_items_path, local:true do |f| %>
       <div class="col-md-6">
-        <!--<%= attachment_image_tag @item, :image, size:'250x250', fallback: 'no_image.jpg',size: "130x100" %>-->
+
         <%= f.label:商品画像, class:"col-xs-2" %>
         <%= f.attachment_field :image %>
       </div>
 
-      <div class="col-md-6">
+
         <div class="form-group">
           <%= f.label:商品名, class:"col-xs-2" %>
           <%= f.text_field :name, size:"40x5" %>
@@ -34,16 +33,16 @@
 
         <div class="form-group">
           <%= f.label:販売ステータス, class:"col-xs-3" %>
-          <%= form_with(model: @item, local: true) do |form| %>
-            <%= f.radio_button :is_active, :true %>
-            <%= f.label :is_active, "販売中", {value: :true, style: "display: inline-block;"} %>
-            <%= f.radio_button :is_active, :false %>
-            <%= f.label :is_active, "販売停止中", {value: :false, style: "display: inline-block;"} %>
-          <% end %>
+
+            <%= f.radio_button :is_active, :sale %>
+            <%= f.label :is_active, "販売中", {value: :sale, style: "display: inline-block;"} %>
+            <%= f.radio_button :is_active, :stop_selling %>
+            <%= f.label :is_active, "販売停止中", {value: :stop_selling, style: "display: inline-block;"} %>
+
         </div>
 
-        <%= f.submit "新規登録" ,class: "btn btn-warning"%>
-      </div>
+        <%= f.submit "新規登録" ,class: "btn btn-success"%>
+
 
     <% end %>
 
