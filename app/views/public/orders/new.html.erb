@@ -1,0 +1,44 @@
+
+    <h2>購入情報入力</h2>
+
+
+    <%= form_with model:@new_order,url:complete_path,local:true do |f| %>
+
+    <strong>お支払い方法</strong>
+
+    <div>
+      <%= f.radio_button :payment_method, Order.payment_methods.key(0) %>
+      <%= f.label :payment_method, Order.payment_methods_i18n[:credit_card] %>
+    <br>
+      <%= f.radio_button :payment_method, Order.payment_methods.key(1) %>
+      <%= f.label :payment_method, Order.payment_methods_i18n[:transfer]%>
+    </div>
+
+    <strong>お届け先</strong>
+    <br>
+      <%= f.radio_button :select_method, Order.select_methods.key(0) %>
+    　<%= f.label :select_method, Order.select_methods_i18n[:your_address] %>
+    　<%= current_customer.postal_code %><%= current_customer.address %><br>
+    　<%= current_customer.last_name %>
+
+    <br>
+
+      <%= f.radio_button :select_method, Order.select_methods.key(1) %>
+      <%= f.label :select_method, Order.select_methods_i18n[:registered_address] %>
+      <%= f.select :address_id, options_from_collection_for_select(Address.all, :id, :full_address) %>
+    <br>
+
+      <%= f.radio_button :select_method, Order.select_methods.key(2) %>
+      <%= f.label :select_method, Order.select_methods_i18n[:new_address] %>
+    <br>
+    　<lavel>郵便番号（ハイフンなし）</lavel>
+      <%= f.text_field :postal_code,autoforcus: true, autocomplete: "postal_code", placeholder: "(郵便番号)" %>
+      <lavel>住所</lavel>
+      <%= f.text_field :address,autoforcus: true, autocomplete: "address", placeholder: "(住所)" %>
+      <lavel>宛名</lavel>
+      <%= f.text_field :reciever_name,autoforcus: true, autocomplete: "reciever_name", placeholder: "(宛名)" %>
+    <br>
+
+      <%= f.submit "確認画面へ進む", class: "btn btn-outline-danger ml-auto" %>
+
+    <% end %>
