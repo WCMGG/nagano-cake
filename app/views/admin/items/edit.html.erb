@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="row">
+    <h2>商品編集</h2>
+    <%= form_with model:@item,url:admin_item_path,local:true do |f| %>
+    <div class="col-lg-4">
+      <%= f.attachment_field :image %>
+    </div>
+    <div class="col-lg-6">
+        <div class="form-group">
+          <%= f.label:商品名, class:"col-xs-2" %>
+          <%=  f.text_field :name, size:"56x5" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label:商品説明, class:"col-xs-2" %>
+          <%= f.text_area :introduction, size:"55x5" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label:ジャンル, class:"col-xs-2" %>
+          <%= f.collection_select :genre_id, Genre.all, :id,:name,{prompt: "--選択してください--"} %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label:税抜価格, class:"col-xs-2" %>
+          <%= f.text_field :price %>円
+        </div>
+
+        <div class="form-group">
+          <%= f.radio_button :is_active, :sale %>
+          <%= f.label :is_active, "販売中", {value: :sale, style: "display: inline-block;"} %>
+          <%= f.radio_button :is_active, :stop_selling %>
+          <%= f.label :is_active, "販売停止中", {value: :stop_selling, style: "display: inline-block;"} %>
+        </div>
+
+        <div>
+          <%= f.submit "変更を保存" , class: "btn btn-success"%></td>
+        </div>
+        <% end %>
+    </div>
+  </div>
+</div>
