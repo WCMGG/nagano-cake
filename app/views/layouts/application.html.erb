@@ -20,7 +20,7 @@
         <% if customer_signed_in? %>
 
           <li>
-            <%= link_to customer_path(current_customer) do %>
+            <%= link_to customers_path do %>
               <button type="button" class="btn btn-warning rounded-pill btn-outline-dark">マイページ</button>
             <% end %>
           </li>
