@@ -1,0 +1,40 @@
+<h2>注文情報確認</h2>
+
+
+ <% current_customer.cart_items.each do |cart_item| %>
+  <tr>
+  <th>商品名</th>
+  <td><%= cart_item.item.name %></td>
+  <th>単価（税込</th>
+  <td></td>
+  <th>数量</th>
+  <td><%= cart_item.ammount %></td>
+  <th>小計</th>
+  <td></td>
+  </tr>
+ <% end %>
+
+  <tr>
+  <th>送料</th>
+  <td><%= @order.shipping_cost %></td>
+
+  <th>商品合計</th>
+  <td></td>
+ 
+
+
+<th>請求金額</th>
+<td><%= @order.billing_amount %></td>
+</tr>
+
+<p><strong>支払方法</strong>
+<%= @order.payment_method_i18n %>
+<p>
+    
+<strong>お届け先</strong>
+〒<%= @order.postal_code %>　【住所】<%= @order.address %>　【宛名】<%= @order.receiver_name %>
+</p>
+
+ <%= form_with(model: @order,url:orders_path, method: :post, local: true) do |f| %>
+ <%= f.submit "注文を確定する", class:"btn btn-primary col-xs-12" %>
+ <% end %>
