@@ -13,4 +13,10 @@ class Item < ApplicationRecord
     (self.price * 1.10).round
   end
   
+  # 税込表示の為の追加分
+  def with_tax_price
+    (price * 1.1).floor
+  end
+
+  
 end

@@ -43,6 +43,15 @@ class Public::OrdersController < ApplicationController
   end
 
   def create
+    @order = Order.new(order_params)
+    @orders = Order.all
+    @order.customer_id = current_customer.id
+    if @order.save
+      redirect_to complete_path
+    else
+      render :show
+    end
+    
   end
 
   def complete
