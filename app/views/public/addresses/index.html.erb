@@ -1,3 +1,4 @@
+<%= flash[:notice] %>
 <div class="container my-5">
   <h3><strong>配送先登録 / 一覧</strong></h3><br>
     <%= form_with model:@address, url:addresses_path, local:true do |f| %>
@@ -5,17 +6,39 @@
       <label class="col-lg-3">郵便番号(ハイフン無し)</label>
         <%= f.text_field :postal_code, class: "col-xs-3" %>
     </div><br>
+
     <div class="row">
       <label class="col-lg-3">住所</label>
         <%= f.text_field :address, class: "col-sm-6" %>
     </div><br>
+
     <div class="row">
       <label class="col-lg-3">宛名</label>
       <div class="col-mx-auto">
-      <%= f.text_field :name, class: "col-xs-3" %>
-      <%= f.submit "新規登録", class: "btn btn-success" %>
-    <% end %>
-    </div>
-    </div>
-    </div>
+      <%= f.text_field :recelver_name, class: "col-xs-3" %>
+      <%= f.submit "新規登録", class: "btn btn-success ml-3" %>
+      <% end %>
+      </div>
+    </div><br>
+
+    <table class="table table-bordered">
+      <tr>
+        <td class="col-md-2">郵便番号</td>
+        <td class="col-md-4">住所</td>
+        <td class="col-md-2">宛名</td>
+        <td class="col-md-2"></td>
+      </tr>
+
+      <% @addresses.each do |address| %>
+      <tr>
+        <td class="col-md-2"><%= address.postal_code %></td>
+        <td class="col-md-4"><%= address.address %></td>
+        <td class="col-md-2"><%= address.recelver_name %></td>
+        <td class="col-md-2">
+          <%= link_to "編集する", edit_address_path(address), class: "btn btn-success" %>
+          <%= link_to "削除する", address_path(address), method: :delete, class: "btn btn-danger" %>
+        </td>
+      </tr>
+      <% end %>
+    </table>
 </div>

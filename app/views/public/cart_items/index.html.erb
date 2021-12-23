@@ -1,0 +1,31 @@
+<div class="container my-4" >
+  <div class="row">
+    <div class="col-xl-12">
+      <h3><strong>ショッピングカート</strong></h3>
+      <div class="text-right">
+        <%= link_to "カートを空にする", cart_items_path, method: :delete, class: "btn btn-danger mb-3" %>
+      </div>
+
+
+    <table class="table table-info table-bordered">
+      <tr>
+        <td class="col-md-2">商品名</td>
+        <td class="col-md-4">単価（税込）</td>
+        <td class="col-md-2">数量</td>
+        <td class="col-md-2">小計</td>
+        <td class="col-md-2"></td>
+      </tr>
+      <%= @cart_items.each do |cart_item| %>
+      <tr>
+        <td class="col-md-2"><%= cart_item.item_name %></td>
+        <td class="col-m4-2"><%= @cart_item.add_tax_price.to_s(:delimited) %></td>
+        <td class="col-md-2">
+          
+        </td>
+        <td class="col-md-2"></td>
+        <td class="col-md-2"></td>
+      </tr>
+    </table>
+    <%= link_to "買い物を続ける", items_path, class: "btn btn-primary" %>
+  </div>
+</div>
