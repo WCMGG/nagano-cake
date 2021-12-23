@@ -5,24 +5,24 @@
     このサイトは、ケーキ販売のECサイトになります。<br>
     会員ではない方も商品の閲覧はできますが、<br>
     購入には会員登録が必要になります。
-   </div>  
-    
+   </div>
+
     <div class="col-xs-9 col-xs-offset-1 top-main">
       <div class="row item-card-content">
         <h3>新着商品</h3>
         <% @items.each do |item| %>
-        <%= link_to item_path(item.id) do %>
-        <div class="thumbnail item-thumbnail col-xs-2">
-          <%= attachment_image_tag item, :image, :size => '300x300' %>
-          <div class="caption">
-            <p><%= item.name %></p>
-            <p><%= "#{item.price}円" %></p>
-           
+          <%= link_to item_path(item.id) do %>
+          <div class="thumbnail item-thumbnail col-xs-2">
+            <%= attachment_image_tag item, :image, :size => '200x200' %>
+            <div class="caption">
+              <p><%= item.name %></p>
+              <p><%= "#{item.price}円" %></p>
+            </div>     
           </div>
-        </div>
-        <% end %>
+          <% end %>
         <% end %>
       </div>
+      <%= link_to "全ての商品を見る>", items_path %>
     </div>
   </div>
 </div>
