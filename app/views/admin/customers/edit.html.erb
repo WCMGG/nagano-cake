@@ -1,0 +1,41 @@
+<div class="container my-5">
+  <h3><strong>会員情報編集</strong></h3>
+    <%= form_with model:@customer, url:admin_customer_path(@customer), local:true do |f| %>
+    <div class="row">
+      <label class="col-lg-3">氏名</label>
+        <div class="col-xs-3">
+          <%= f.text_field :last_name %>
+          <%= f.text_field :first_name %>
+        </div>
+    </div><br>
+
+    <div class="row">
+      <label class="col-lg-3">フリガナ</label>
+        <div class="col-xs-3">
+          <%= f.text_field :last_name_kana %>
+          <%= f.text_field :first_name_kana %>
+        </div>
+    </div><br>
+
+    <div class="row">
+      <label class="col-lg-3">郵便番号</label>
+          <%= f.text_field :postal_code, class: "col-xs-3" %>
+    </div><br>
+
+    <div class="row">
+      <label class="col-lg-3">住所</label>
+          <%= f.text_field :address, class: "col-sm-6" %>
+    </div><br>
+
+    <div class="row">
+      <label class="col-lg-3">電話番号</label>
+          <%= f.text_field :phone_number, class: "col-xs-3" %>
+    </div><br>
+
+    <div class="row">
+      <label class="col-lg-3">メールアドレス</label>
+          <%= f.text_field :email, class: "col-sm-6" %>
+    </div><br>
+      <%= f.submit "編集内容を保存", class: "btn btn-primary col-xs-offset-6" %>
+    <% end %>
+</div>
