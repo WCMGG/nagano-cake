@@ -7,8 +7,6 @@ class Item < ApplicationRecord
   
   # 画像取得・アップロード用
   attachment :image
-  # enumの設定
-  enum is_active: {sale:0, stop_selling:1}
   
   # 消費税計算用
   def add_tax_price

@@ -1,0 +1,11 @@
+<%= attachment_image_tag @item, :image, size: "120x120" %>
+<%= @item.name %>
+<%= @item.introduction %>
+¥<%= @item.add_tax_price.to_s(:delimited) %>(税込)
+<% if customer_signed_in? %>
+<%= form_with model: @cart_item, url: cart_items_path, local: true do |f| %>
+  <%= f.hidden_field :item_id, :value => @item.id %>
+    <%= f.number_field :amount , placeholder: "個数選択", min: 1, max: 20 %>
+    <%= f.submit 'カートに入れる', class: "btn-sm btn-success" %>
+  <% end %>
+<% end %>
