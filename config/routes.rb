@@ -22,6 +22,7 @@ scope module: :public do
   patch "customers/profile_edit" => "customers#update"
   resources :orders, only: [:create, :new, :index, :show]
   resources :addresses, only: [:index, :edit, :create, :update, :destroy]
+  patch "addresses" => "addresses#update"
   resources :items, only: [:index, :show]
   resources :cart_items, only: [:index, :create, :update, :destroy]
 
