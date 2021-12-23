@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-      <h3>商品一覧</h3>
+      <h2>商品一覧</h2>
       <div class="col-xs-9">
         <div class="text-right">
           <%= link_to new_admin_item_path do %>
@@ -26,8 +26,8 @@
               <td><%= item.genre.name %></td>
               <td>
                 <% if item.is_active %>
-                   販売中
-                  <% else %>
+                  <%= "販売中" %>
+                <% else %>
                   <%=  "販売停止中" %>
                 <% end %>
               </td>
@@ -35,6 +35,8 @@
             <% end %>
           </tbody>
         </table>
+        <%= paginate @items %>
       </div>
   </div>
 </div>
+

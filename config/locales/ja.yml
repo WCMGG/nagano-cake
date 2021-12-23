@@ -1,14 +1,10 @@
 ja:
   enums:
-    item:
-      is_active:
-        sale: "販売中"
-        stop_selling: "販売停止中"
     order:
       payment_method:
         credit_card: "クレジットカード"
         transfer: "銀行振込"
-      select_method:
+      select_address:
         your_address: "ご自身の住所"
         registered_address: "登録済住所から選択"
         new_address: "新しいお届け先"
