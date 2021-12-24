@@ -1,4 +1,7 @@
 class Order < ApplicationRecord
+  
+  belongs_to :customer
+  
 
   # enumの導入
 
@@ -15,6 +18,11 @@ class Order < ApplicationRecord
     def add_tax_price
         (self.price * 1.1).round
     end
-
+    
+    def subtotal
+      item.add_tax_price * amount
+    end 
+    
+    
 
 end
