@@ -12,6 +12,7 @@ class Public::OrdersController < ApplicationController
   def confirm
 
     @order = Order.new(order_params)
+    @order.billing_amount = 
 
 
     # 注文情報入力画面から確認画面へ渡す注文先データの取得
@@ -46,12 +47,12 @@ class Public::OrdersController < ApplicationController
     @order = Order.new(order_params)
     @orders = Order.all
     @order.customer_id = current_customer.id
-    if @order.save
+    if @order.save!
       redirect_to complete_path
     else
       render :show
     end
-    
+
   end
 
   def complete
@@ -63,7 +64,7 @@ class Public::OrdersController < ApplicationController
 
 
   def order_params
-    params.require(:order).permit(:payment_method, :postal_code, :address, :name)
+    params.require(:order).permit(:payment_method, :postal_code, :address, :receiver_name, :shipping_cost, :billing_amount, :order_status)
   end
 
 end
