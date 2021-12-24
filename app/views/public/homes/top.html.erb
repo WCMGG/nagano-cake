@@ -1,19 +1,20 @@
 <div class="container my-5">
   <div class="row">
-    <%= image_tag "item1.jpg",class: "rounded", :width => '100%', :height => '400px' %><br>
+    <%= image_tag "item6.jpg",class: "rounded", :width => '100%', :height => '400px' %><br>
   </div>
     <p class="text-center my-5">
     ようこそ、ながのCAKEへ!<br>
     このサイトは、ケーキ販売のECサイトになります。<br>
     会員ではない方も商品の閲覧はできますが、
     購入には会員登録が必要になります。</p>
+
+  <h3>新着商品</h3><br>
   <div class="row">
     <div class="item-card-content">
-      <div class=" d-flex float-left">
-      <h3>新着商品</h3><br>
+      <div class=" d-flex flax-wrap">
         <% @items.each do |item| %>
         <%= link_to item_path(item.id) do %>
-        <div class="thumbnail item-thumbnail col-xs-2">
+        <div class="rounded">
           <%= attachment_image_tag item, :image, :size => '200x200' %>
         <div class="caption">
           <p><%= item.name %></p>
@@ -24,8 +25,10 @@
         <% end %>
         <% end %>
     </div>
+     <div class="text-right mr-5">
       <p>
       <%= link_to "全ての商品を見る>", items_path %>
       </p>
+     </div>
   </div>
 </div>
