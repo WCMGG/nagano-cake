@@ -1,44 +1,80 @@
+<div class="container my-5">
 
-    <h2>購入情報入力</h2>
-
+    <div class="row">
+    <div class="col-md-12">
+    <h3><strong>購入情報入力</strong></3>
+    </div>
+    <div>
 
     <%= form_with model:@new_order,url:confirm_path,local:true do |f| %>
 
-    <strong>お支払い方法</strong>
 
-    <div>
+    <div class="row">
+      <h5><strong>お支払い方法</strong></h5>
+      <div class="col-md-12">
       <%= f.radio_button :payment_method, Order.payment_methods.key(0) %>
       <%= f.label :payment_method, Order.payment_methods_i18n[:credit_card] %>
-    <br>
+      </div>
+      <div class="col-md-12">
       <%= f.radio_button :payment_method, Order.payment_methods.key(1) %>
       <%= f.label :payment_method, Order.payment_methods_i18n[:transfer]%>
+      </div>
     </div>
 
-    <strong>お届け先</strong>
-    <br>
-      <%= f.radio_button :select_address, 0 %>
-    　<%= f.label :select_address, Order.select_addresses_i18n[:your_address] %>
-    　<%= current_customer.postal_code %><%= current_customer.address %><br>
-    　<%= current_customer.last_name %><%= current_customer.first_name %>
 
-    <br>
+    <div class="row">
+     <h5><strong>お届け先</strong></h5>
 
+      <div class="col-md-12">
+        <th>
+          <%= f.radio_button :select_address, 0 %>
+    　     <%= f.label :select_address, Order.select_addresses_i18n[:your_address] %>
+    　   </th>
+      </div>
+
+      <div class="col-md-12">
+    　 <strong>［〒］</strong>    <%= current_customer.postal_code %> 
+    　 <strong>［住所］</strong>  <%= current_customer.address %> 
+    　 <strong>［名前］</strong>  <%= current_customer.last_name %><%= current_customer.first_name %>
+      </div>
+    </div>
+
+　　<br>
+    <div class="row">
+     <div class="col-md-12">
       <%= f.radio_button :select_address, 1 %>
       <%= f.label :select_address, Order.select_addresses_i18n[:registered_address] %>
-      <%= f.select :address_id, options_from_collection_for_select(Address.all, :id, :full_address) %>
-    <br>
+      <br><%= f.select :address_id, options_from_collection_for_select(Address.all, :id, :full_address) %>
+    </div>
+    </div>
 
+    <br>
+    <div class="row">
+     <div class="col-md-12">
       <%= f.radio_button :select_address, 2 %>
       <%= f.label :select_address, Order.select_addresses_i18n[:new_address] %>
-    <br>
-    　<lavel>郵便番号（ハイフンなし）</lavel>
-      <%= f.text_field :postal_code,autoforcus: true, autocomplete: "postal_code", placeholder: "(郵便番号)" %>
-      <lavel>住所</lavel>
-      <%= f.text_field :address,autoforcus: true, autocomplete: "address", placeholder: "(住所)" %>
-      <lavel>宛名</lavel>
-      <%= f.text_field :reciever_name,autoforcus: true, autocomplete: "reciever_name", placeholder: "(宛名)" %>
-    <br>
+     </div>
 
+     <table class="table">
+      <tr><th class="col-md-3">郵便番号（ハイフンなし）</th><td>
+      <%= f.text_field :postal_code,autoforcus: true, autocomplete: "postal_code", placeholder: "(郵便番号)" %><br>
+      </td></tr>
+
+      <tr><th class="col-md-3">住所</th><td>
+      <%= f.text_field :address, :size=> "80", autoforcus: true, autocomplete: "address", placeholder: "(住所)" %>
+　　　</td></tr>
+      <tr><th class="col-md-2">宛名</th><td>
+      <%= f.text_field :reciever_name, :size=> "40", autoforcus: true, autocomplete: "reciever_name", placeholder: "(宛名)" %>
+      </td></tr>
+     </table >
+    </div>
+
+
+      <th class="col-md-12">
       <%= f.submit "確認画面へ進む", class: "btn btn-outline-danger ml-auto" %>
+      </th>
 
     <% end %>
+    </div>
+
+</div>
