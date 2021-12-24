@@ -2,34 +2,55 @@
   <div class="row">
     <div class="col-xl-12">
       <h3><strong>ショッピングカート</strong></h3>
-      <div class="text-right">
-        <%= link_to "カートを空にする", cart_items_path, method: :delete, class: "btn btn-danger mb-3" %>
-      </div>
-
-
-    <table class="table table-info table-bordered">
-      <tr>
-        <td class="col-md-4">商品名</td>
-        <td class="col-md-2">単価（税込）</td>
-        <td class="col-md-2">数量</td>
-        <td class="col-md-2">小計</td>
-        <td class="col-md-2"></td>
-      </tr>
-      <% @cart_items.each do |cart_item| %> <%# 文字列が〜〜と出てしまったら、＝が入ってないか確認。 %>
-      <tr>
-        <td class="col-md-4"><%= cart_item.item.name %></td> <%# 複数形だと、全てのデータとなってしまうので、一つのデータを取ってくるなら、単数形で記述 %>
-        <td class="col-md-2"><%= cart_item.item.with_tax_price %></td> <%# cart_itemの中のアイテムの消費税（modelに追加した計算式で税込に） %>
-        <td class="col-md-2">
-        </td>
-        <td class="col-md-2"><%= cart_item.subtotal %></td>
-        <td class="col-md-2">
-          <%= link_to "削除する", cart_item_path(cart_item), method: :delete, class: "btn btn-danger" %> <%# Rails routesで確認した時に、"URL ~~:id" がある場合は（引数）が必要 %>
-        </td>
-      </tr>
-      <% end %>
-    </table>
-    <%= link_to "買い物を続ける", items_path, class: "btn btn-primary" %>
-    
-    <%= link_to "情報入力に進む", new_order_path, class: "btn btn-success" %>
+        <div class="text-right">
+          <%= link_to "カートを空にする", destroy_all_path, method: :delete, class: "btn btn-danger mb-3" %>
+        </div>
+      <table class="table table-bordered">
+        <thead>
+          <tr class="table-info">
+            <th class="col-md-4">商品名</th>
+            <th class="col-md-2">単価（税込）</th>
+            <th class="col-md-2">数量</th>
+            <th class="col-md-2">小計</th>
+            <th class="col-md-2"></th>
+          </tr>
+        </thead>
+        <% @total = 0 %> <%#合計金額の計算の前に、@定義の数値を0にしてあげる %>
+        <tbody>
+          <% @cart_items.each do |cart_item| %> <%# 文字列が〜〜と出てしまったら、＝が入ってないか確認。 %>
+          <tr>
+            <td><%= cart_item.item.name %></td>
+              <%# 複数形だと、全てのデータとなってしまうので、一つのデータを取ってくるなら、単数形で記述 %>
+            <td><%= cart_item.item.with_tax_price %></td>
+              <%# cart_itemの中のアイテムの消費税（modelに追加した計算式で税込に） %>
+            <td>
+              <%= form_with model: cart_item, url: cart_item_path(cart_item), local: true do |f| %>
+              <%# 新規投稿/保存の時が、model名.new 情報を更新する時は更新したいレコードの時は一つ分のデータが必要。eachに入ってなかった場合はparams[:id]
+              eachがある時は、中身の値が変わるので、そのデータを取れるようにに参照  %>
+              <%= f.number_field :amount, min: 1, max: 20 %>
+              <%= f.submit '変更', class: "btn-sm btn-success bl-3" %>
+              <% end %>
+            </td>
+            <td><%= cart_item.subtotal %></td>
+                <% @total += cart_item.subtotal %>
+                <%# 合計金額の計算式自体はeach文の中に製作 %>
+            <td><%= link_to "削除する", cart_item_path(cart_item), method: :delete, class: "btn btn-danger mx-auto" %></td>
+              <%# Rails routesで確認した時に、"URL ~~:id" がある場合は（引数）が必要 %>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+        <%= link_to "買い物を続ける", items_path, class: "btn btn-primary mb-3" %>
+      <table class="table table-bordered">
+        <tbody>
+          <tr>
+            <td class="col-md-2"><strong>合計金額</strong></td>
+            <td class="col-md-2"><%= @total %></td>
+            <%# 計算結果はeach文の外でも大丈夫 %>
+          </tr>
+        </tbody>
+      </table>
+      <%= link_to "情報入力に進む", new_order_path, class: "btn btn-success" %>
+    </div>
   </div>
 </div>
