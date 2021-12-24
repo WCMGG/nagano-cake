@@ -20,7 +20,7 @@
 
   <th>商品合計</th>
   <td></td>
- 
+
 
 
 <th>請求金額</th>
@@ -30,7 +30,7 @@
 <p><strong>支払方法</strong>
 <%= @order.payment_method_i18n %>
 <p>
-    
+
 <strong>お届け先</strong>
 〒<%= @order.postal_code %>　【住所】<%= @order.address %>　【宛名】<%= @order.receiver_name %>
 </p>
@@ -38,3 +38,6 @@
  <%= form_with(model: @order,url:orders_path, method: :post, local: true) do |f| %>
  <%= f.submit "注文を確定する", class:"btn btn-primary col-xs-12" %>
  <% end %>
+ 
+ 
+ 
