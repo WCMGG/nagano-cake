@@ -4,6 +4,7 @@ class Public::OrdersController < ApplicationController
   end
 
   def index
+    @orders = current_customer.order
   end
 
   def show
@@ -12,7 +13,7 @@ class Public::OrdersController < ApplicationController
   def confirm
 
     @order = Order.new(order_params)
-    @order.billing_amount = 
+    @order.billing_amount =
 
 
     # 注文情報入力画面から確認画面へ渡す注文先データの取得
@@ -47,27 +48,10 @@ class Public::OrdersController < ApplicationController
     @order = Order.new(order_params)
     @orders = Order.all
     @order.customer_id = current_customer.id
-    
+
     if @order.save
-    
-      
-       
-       @address = Address.new
-       @address.customer_id = @order.customer_id
-       @address.postal_code = @order.postal_code
-       @address.address = @order.address
-       @address.receiver_name = @order.reciever_name
-       
-       # exist where
-         
-       if @address = Address.where()
-       
-      
-       
-       @address.save
-       
       redirect_to complete_path
-      
+
     else
       render :show
     end
