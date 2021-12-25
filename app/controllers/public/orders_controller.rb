@@ -47,6 +47,7 @@ class Public::OrdersController < ApplicationController
     @order = Order.new(order_params)
     @orders = Order.all
     @order.customer_id = current_customer.id
+
     if @order.save
       cart_items = CartItem.where(customer_id: current_customer.id)
       cart_items.each do |cart_item,order_detail|
@@ -57,6 +58,7 @@ class Public::OrdersController < ApplicationController
        order_detail.item_amount = cart_item.amount
        order_detail.save
     end
+      
       redirect_to complete_path
 
     else
