@@ -43,6 +43,6 @@
   <%= f.hidden_field :address, :value => @order.address %>
   <%= f.hidden_field :receiver_name, :value => @order.receiver_name %>
   <%= f.hidden_field :shipping_cost, :value => @order.shipping_cost %>
-  <%= f.hidden_field :billing_amount, :value => @order.billing_amount %>
+  <%= f.hidden_field :billing_amount, :value => billing_amount %>
   <%= f.submit "注文を確定する", class:"btn btn-primary col-xs-12" %>
  <% end %>
