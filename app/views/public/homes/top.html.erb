@@ -9,25 +9,21 @@
     購入には会員登録が必要になります。</p>
 
   <h3>新着商品</h3><br>
-  <div class="row">
-    <div class="item-card-content">
-      <div class=" d-flex flax-wrap">
+  <div class="row mr-2">
+    <div class=" d-flex flax-wrap mr-4 ">
         <% @items.each do |item| %>
         <%= link_to item_path(item.id) do %>
-        <div class="rounded">
+      <div class="img">
           <%= attachment_image_tag item, :image, :size => '200x200' %>
-        <div class="caption">
           <p><%= item.name %></p>
           <p><%= "#{item.price}円" %></p>
       </div>
-        </div>
-        </div>
         <% end %>
         <% end %>
     </div>
      <div class="text-right mr-5">
       <p>
-      <%= link_to "全ての商品を見る>", items_path %>
+      <%= link_to "全ての商品を見る", items_path %>
       </p>
      </div>
   </div>
