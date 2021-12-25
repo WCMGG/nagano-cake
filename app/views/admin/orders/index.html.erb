@@ -4,25 +4,22 @@
       <h3><strong>注文履歴一覧</strong></h3>
 
 
-    <table class="table table-bordered">
-      <tr>
-        <td class="col-md-1">購入日時</td>
+    <table class="table">
+      <tr class="table-info">
+        <td class="col-md-2">購入日時</td>
         <td class="col-md-2">購入者</td>
-        <td class="col-md-3">注文個数</td>
+        <td class="col-md-2">注文個数</td>
         <td class="col-md-2">ステータス</td>
       </tr>
       
     <% @orders.each do |order| %>  
       <tr>
-        <td class="col-md-1"><%= link_to admin_order_path(order.id) do %>購入日時<% end %></td>
-        <td class="col-md-2"><%= order.customer.last_name + @order.customer.first_name %></td>
-        <td class="col-md-3"><%= order.cart_item.amount %></td>
-        <td class="col-md-2">
-        <%= form_with model: order, url: admin_order_path(order), class:"update_status" do |f| %>
-        <%= f.select :status, Order.statuses.keys %>
-        <%= f.submit "更新", class:'btn btn-info' %>
-        <% end %>
-        </td>
+        <td><%= link_to order.created_at.strftime("%Y-%m-%d %H:%M:%S"), admin_order_path(order) %></td>
+        <%#  %>
+        <td><%= order.customer.last_name + order.customer.first_name %></td>
+        <td><%=  order.order_details.sum(:item_amount)%></td>
+        <%# 注文詳細sumを使用するかも？%>
+        <td><%= order.order_status %></td>
       </tr>
       <% end %>
     </table>
