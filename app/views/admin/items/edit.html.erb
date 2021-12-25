@@ -1,6 +1,6 @@
-<div class="container">
+<div class="container my-4">
+  <h3><strong>商品編集</strong></h3>
   <div class="row">
-    <h2>商品編集</h2>
     <%= form_with model:@item,url:admin_item_path,local:true do |f| %>
     <div class="col-lg-4">
       <%= f.attachment_field :image %>
