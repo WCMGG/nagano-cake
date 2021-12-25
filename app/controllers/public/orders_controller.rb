@@ -48,7 +48,6 @@ class Public::OrdersController < ApplicationController
     @orders = Order.all
     @order.customer_id = current_customer.id
     if @order.save!
-    
       redirect_to complete_path
       
     else
