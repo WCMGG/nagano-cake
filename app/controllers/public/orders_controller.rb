@@ -47,9 +47,8 @@ class Public::OrdersController < ApplicationController
     @order = Order.new(order_params)
     @orders = Order.all
     @order.customer_id = current_customer.id
-    if @order.save!
-      
-      
+    
+    if @order.save
        
        @address = Address.new
        @address.customer_id = @order.customer_id
