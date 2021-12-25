@@ -47,24 +47,17 @@ class Public::OrdersController < ApplicationController
     @order = Order.new(order_params)
     @orders = Order.all
     @order.customer_id = current_customer.id
-    if @order.save!
-      
-      
-       
-       @address = Address.new
-       @address.customer_id = @order.customer_id
-       @address.postal_code = @order.postal_code
-       @address.address = @order.address
-       @address.receiver_name = @order.reciever_name
-       
-       # exist where
-         
-       if @address = Address.where()
-       
-      
-       
-       @address.save
-       
+    if @order.save
+      cart_items = CartItem.where(customer_id: current_customer.id)
+      cart_items.each do |cart_item,order_detail|
+       order_detail = OrderDetail.new
+       order_detail.order_id = @order.id
+       order_detail.item_id = cart_item.item_id
+       order_detail.ordered_price = cart_item.item.price
+       order_detail.item_amount = cart_item.amount
+      # order_detail.making_status = 0
+       order_detail.save
+    end  
       redirect_to complete_path
       
     else
