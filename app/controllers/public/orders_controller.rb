@@ -12,7 +12,7 @@ class Public::OrdersController < ApplicationController
   def confirm
 
     @order = Order.new(order_params)
-    @order.billing_amount = 
+    @order.billing_amount =
 
 
     # 注文情報入力画面から確認画面へ渡す注文先データの取得
@@ -47,9 +47,20 @@ class Public::OrdersController < ApplicationController
     @order = Order.new(order_params)
     @orders = Order.all
     @order.customer_id = current_customer.id
-    if @order.save!
-      redirect_to complete_path
+
+    if @order.save
+      cart_items = CartItem.where(customer_id: current_customer.id)
+      cart_items.each do |cart_item,order_detail|
+       order_detail = OrderDetail.new
+       order_detail.order_id = @order.id
+       order_detail.item_id = cart_item.item_id
+       order_detail.ordered_price = cart_item.item.price
+       order_detail.item_amount = cart_item.amount
+       order_detail.save
+    end
       
+      redirect_to complete_path
+
     else
       render :show
     end
