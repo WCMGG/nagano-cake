@@ -47,23 +47,7 @@ class Public::OrdersController < ApplicationController
     @order = Order.new(order_params)
     @orders = Order.all
     @order.customer_id = current_customer.id
-    
-    if @order.save
-       
-       @address = Address.new
-       @address.customer_id = @order.customer_id
-       @address.postal_code = @order.postal_code
-       @address.address = @order.address
-       @address.receiver_name = @order.reciever_name
-       
-       # exist where
-         
-       if @address = Address.where()
-       
-      
-       
-       @address.save
-       
+    if @order.save!
       redirect_to complete_path
       
     else
