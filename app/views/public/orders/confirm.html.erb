@@ -25,7 +25,7 @@
 
 
   <th>請求金額</th>
-  <td><%= billing_amount + 800 %></td>
+  <td><%= (billing_amount + 800).to_s(:delimited) %></td>
  </tr>
 
 <p><strong>支払方法</strong>
