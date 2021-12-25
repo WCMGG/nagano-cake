@@ -71,4 +71,6 @@ gem "refile-mini_magick"
 gem 'kaminari'
 
 gem "enum_help"
+
 gem "pry-rails"
+
