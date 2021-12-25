@@ -1,18 +1,21 @@
 <div class="container my-5">
-  <div class="col-md-12">
+  <div class="row">
     <%= attachment_image_tag @item, :image, size: "300x260" %>
-      <tr>
-        <th class="col-md-2"><%= @item.name %></th>
-        <th class="col-md-2"><%= @item.introduction %></th>
-        <th class="col-md-2">¥<%= @item.add_tax_price.to_s(:delimited) %>(税込)</th>
+      <div class="col-md-4">
+        <h2><strong><%= @item.name %></strong></h2><br>
+        <h3><%= @item.introduction %></h3><br><br>
+        <strong>¥<%= @item.add_tax_price.to_s(:delimited) %>(税込)<strong><br><br>
+      </div>
       <% if customer_signed_in? %>
-        <td>
-        <%= form_with model: @cart_item, url: cart_items_path, local: true do |f| %>
-        <%= f.hidden_field :item_id, :value => @item.id %>
-      　<%= f.number_field :amount , placeholder: "個数選択", min: 1, max: 20 %></td>
-        <td class="col-md-2"><%= f.submit 'カートに入れる', class: "btn-sm btn-success" %></td>
+      <div class="col-ms-12">
+        <%= form_with model: @cart_item, url: cart_items_path, local: true do |f| %><br>
+          <%= f.hidden_field :item_id, :value => @item.id %>
+          <div class="box">
+          <%= f.number_field :amount , placeholder: "個数選択", min: 1, max: 20 %><br>
+          <%= f.submit 'カートに入れる', class: "btn-sm btn-success" %>
+          </div>
+          <% end %>
         <% end %>
-      </tr>
-      <% end %>
+      </div>
   </div>
 </div>
