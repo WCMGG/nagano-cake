@@ -4,7 +4,7 @@ class Public::OrdersController < ApplicationController
   end
 
   def index
-    @orders = current_customer.order
+    @orders = current_customer.orders
   end
 
   def show
@@ -59,7 +59,7 @@ class Public::OrdersController < ApplicationController
        order_detail.item_amount = cart_item.amount
        order_detail.save
     end
-      
+
       redirect_to complete_path
 
     else
