@@ -2,25 +2,31 @@
   <div class="row">
     <div class="col-xl-12">
       <h3><strong>注文履歴詳細</strong></h3>
-        
+
+    <%#= form_with model: @order, url:admins_order_path(@order), method: :patch) do |f| %>
         <tr>
-         <th>購入者<th> <td><%= link_to admin_customer_data_path(@order.customer) do %><%= @customer.last_name %><%= @customer.first_name %><% end %></td>
+         <th>購入者<th> <td><%= link_to admin_customer_path(@order.customer) do %><%= @customer.last_name %><%= @customer.first_name %><% end %></td>
         <br>
-         <th>注文日<th> <td></td>
+         <th>注文日<th> <td><%= @order.created_at.strftime("%Y-%m-%d") %></td>
         <br>
          <th>配送先<th> <td>〒<%= @order.postal_code %>　【住所】<%= @order.address %>　【宛名】<%= @order.receiver_name %></td>
         <br>
          <th>支払方法<th> <td><%= @order.payment_method_i18n %></td>
         <br>
-         <th>注文ステータス</th>
-          <td>
-          <%= form_with model: order, url: admin_order_path(order), class:"update_status" do |f| %>
-          <%= f.select :status, Order.statuses.keys %>
-          <%= f.submit "更新", class:'btn btn-info' %>
+         <tr>
+        <th>注文ステータス</th>
+        <td>
+        <% if @order.order_status == 1 %>
+          <%= form.select :making_status == 1, class: "making_status-select" %>
+        <% else %>
+          <%= form_with model: @order, url: admin_order_path(@order), method: :patch, local: true do |f| %>
+            <%= f.select :order_status, Order.order_statuses.keys, class: "order_status" %>
+            <%= f.submit "更新" , class: "btn btn-outline-success" %>
           <% end %>
-          </td>
-       </tr>
-        
+        <% end %>
+        </td>
+      </tr>
+
       <table class="table table-bordered">
         <thead>
           <tr class="table-info">
@@ -28,39 +34,35 @@
             <th class="col-md-2">単価（税込）</th>
             <th class="col-md-2">数量</th>
             <th class="col-md-2">小計</th>
-            <th class="col-md-2">制作ステータス</th>
-          </tr>
+            <th class="col-md-4">制作ステータス</th>
         </thead>
-        <% @total = 0 %> 
+
         <tbody>
-          <% @cart_items.each do |cart_item| %> %>
+          <% @order_details.each do |order_detail| %>
           <tr>
-            <td><%= cart_item.item.name %></td>
-            <td><%= cart_item.item.with_tax_price %></td>
-            <td><%= cart_item.amount %></td>
-            <td><%= cart_item.subtotal %></td>
-            <% @total += cart_item.subtotal %>
-            
-            <th>制作ステータス</th> 
- 　　　　　　　　　　<%= form_with model: order_detail, url: admin_order_detail_path, method: :patch, local: true do |f| %>
- 　　　　　　　　　　<td><%= f.select :making_status, OrderedDetail.making_statuses.keys, class: "making_status-select" %></td>
- 　　　　　　　　　　<td><%= f.submit "更新", class: "btn btn-outline-success" %></td>
- 　　　　　　　　　　<% end %>
-          </tr>
+            <td><%= order_detail.item.name %></td>
+            <td><%= order_detail.add_tax_price %></td>
+            <td><%= order_detail.item_amount %></td>
+            <td><%= order_detail.add_tax_price * order_detail.item_amount %></td>
+            <%= form_with model: @order_detail, url: admin_order_detail_path(order_detail), method: :patch, local: true do |f| %>
+              <td><%= f.select :making_status, OrderDetail.making_statuses.keys, class: "production_status-select" %>
+              <%= f.submit "更新", class: "btn btn-outline-success" %></td>
+              <% end %>
+
           <% end %>
         </tbody>
       </table>
-      
+
       <table class="table table-bordered">
         <tbody>
           <tr>
-            <td class="col-md-2"><strong>合計金額</strong></td>　<td class="col-md-2"><%= @total %>円</td>
-            <td class="col-md-2"><strong>送料</strong></td> <% @order.shipping_cost = 800 %> <td class="col-md-2"><%= @order.shipping_cost %>円</td>
-            <td class="col-md-2"><strong>請求金額合計</strong></td>　<td class="col-md-2"><%= @order.billing_amount %> <%= @total %> + <%= @order.shipping_cost = 800 %></td>
+            <td class="col-md-2"><strong>合計金額</strong></td>　<td class="col-md-2"><%= @order.billing_amount.to_s(:delimited) %>円</td>
+            <td class="col-md-2"><strong>送料</strong></td><td class="col-md-2"><%= @order.shipping_cost =800 %>円</td>
+            <td class="col-md-2"><strong>請求金額合計</strong></td>　<td class="col-md-2"><%= (@order.billing_amount+800).to_s(:delimited) %></td>
           </tr>
         </tbody>
       </table>
-      
+
     </div>
   </div>
 </div>
