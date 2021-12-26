@@ -9,10 +9,10 @@
         <td class="col-md-2">購入日時</td>
         <td class="col-md-2">購入者</td>
         <td class="col-md-2">注文個数</td>
-        <td class="col-md-2">ステータス</td>
+        <td class="col-md-2">注文ステータス</td>
       </tr>
-      
-    <% @orders.each do |order| %>  
+
+    <% @orders.each do |order| %>
       <tr>
         <td><%= link_to order.created_at.strftime("%Y-%m-%d %H:%M:%S"), admin_order_path(order) %></td>
         <%#  %>
@@ -23,7 +23,7 @@
       </tr>
       <% end %>
     </table>
-    
+
    </div>
  </div>
 
