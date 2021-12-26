@@ -9,7 +9,7 @@ class Public::CartItemsController < ApplicationController
 
     if cart_item != nil
        cart_item.update(amount: cart_item.amount += params[:cart_item][:amount].to_i)
-       # = ログインしてるユーザー　アソシエーションから参照している find_by PK以外参照 != 肯定   == 否定
+       # = ログインしてるユーザー　アソシエーションから参照している find_by PK以外参照 !=   == 否定
        # to_i i = integer
        redirect_to cart_items_path
 
