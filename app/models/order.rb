@@ -15,15 +15,5 @@ class Order < ApplicationRecord
   enum order_status: { "入金待ち":0, "入金確認":1, "製作中":2, "発送準備中":3, "発送済み":4}
 
 
-  # 消費税を加えた商品価格
-    def add_tax_price
-        (self.price * 1.1).round
-    end
-
-    def subtotal
-      item.add_tax_price * amount
-    end
-
-
 
 end
